@@ -27,7 +27,7 @@ do
 		local PortraitBackdrop = BlzCreateFrame('Portrait-Backdrop', GameUI, 0, 0)
 		BlzFrameSetPoint(PortraitBackdrop, FRAMEPOINT_TOP, Portrait, FRAMEPOINT_TOP, -0.037, 0.008)
 		BlzFrameSetPoint(InfoBackdrop, FRAMEPOINT_BOTTOMLEFT, PortraitBackdrop, FRAMEPOINT_BOTTOMRIGHT, -0.024, 0.012)
-		BlzFrameSetSize(InfoBackdrop, 0.132, 0.058)
+		BlzFrameSetSize(InfoBackdrop, 0.18, 0.058)
 		
 		local width, height, alpha = 0.089, 0.014, 100
 		local LevelBar             = BlzGetFrameByName('SimpleHeroLevelBar', 0)
@@ -64,18 +64,18 @@ do
 		
 		local IconAttack = BlzGetFrameByName('InfoPanelIconBackdrop', 0)
 		BlzFrameClearAllPoints(IconAttack)
-		BlzFrameSetPoint(IconAttack, FRAMEPOINT_BOTTOMLEFT, PortraitBackdrop, FRAMEPOINT_TOPLEFT, 0, 0)
+		BlzFrameSetPoint(IconAttack, FRAMEPOINT_TOPRIGHT, PortraitBackdrop, FRAMEPOINT_TOPLEFT, 0, 0)
 		
 		local IconArmor = BlzGetFrameByName('InfoPanelIconBackdrop', 2)
 		BlzFrameClearAllPoints(IconArmor)
-		BlzFrameSetPoint(IconArmor, FRAMEPOINT_BOTTOM, PortraitBackdrop, FRAMEPOINT_TOP, 0, 0)
+		BlzFrameSetPoint(IconArmor, FRAMEPOINT_TOP, IconAttack, FRAMEPOINT_BOTTOM, 0, 0)
 		
 		local IconAttr = BlzGetFrameByName('InfoPanelIconHeroIcon', 6)
 		BlzFrameClearAllPoints(IconAttr)
-		BlzFrameSetPoint(IconAttr, FRAMEPOINT_BOTTOMRIGHT, PortraitBackdrop, FRAMEPOINT_TOPRIGHT, 0, 0)
+		BlzFrameSetPoint(IconAttr, FRAMEPOINT_TOP, IconArmor, FRAMEPOINT_BOTTOM, 0, 0)
 		
 		local Map         = BlzGetOriginFrame(ORIGIN_FRAME_MINIMAP, 0)
-		local MapBackdrop = BlzCreateFrame('Steel-Backdrop', WorldFrame, 0, 0)
+		local MapBackdrop = BlzCreateFrame('Map-Backdrop', WorldFrame, 0, 0)
 		BlzFrameSetSize(MapBackdrop, 0.15, 0.15)
 		BlzFrameSetPoint(MapBackdrop, FRAMEPOINT_CENTER, Map, FRAMEPOINT_CENTER, 0, 0)
 		local MapBtnPing = BlzGetOriginFrame(ORIGIN_FRAME_MINIMAP_BUTTON, 0)
@@ -88,9 +88,62 @@ do
 			BlzFrameSetVisible(BlzGetOriginFrame(ORIGIN_FRAME_MINIMAP_BUTTON, i), false)
 		end
 		
-		for i = 0, 0 do
-			local a = BlzGetFrameByName('ResourceBarGoldText', i)
-			BlzFrameClearAllPoints(a)
+		local ResourceBar = BlzGetFrameByName('ResourceBarFrame', 0)
+		BlzFrameSetSize(ResourceBar, 0, 0)
+		
+		local GoldIcon = BlzCreateFrame('Steel-Backdrop', WorldFrame, 0, 0)
+		BlzFrameSetTexture(GoldIcon, 'UI/Widgets/ToolTips/Human/ToolTipGoldIcon.blp', 0, true)
+		BlzFrameSetSize(GoldIcon, 0.018, 0.018)
+		BlzFrameSetPoint(GoldIcon, FRAMEPOINT_RIGHT, InfoBackdrop, FRAMEPOINT_RIGHT, -0.038, 0.008)
+		
+		local GoldText = BlzGetFrameByName('ResourceBarGoldText', 0)
+		BlzFrameClearAllPoints(GoldText)
+		BlzFrameSetPoint(GoldText, FRAMEPOINT_LEFT, GoldIcon, FRAMEPOINT_LEFT, 0.018, 0)
+		
+		local LumberIcon = BlzCreateFrame('Steel-Backdrop', WorldFrame, 0, 0)
+		BlzFrameSetTexture(LumberIcon, 'UI/Widgets/ToolTips/Human/ToolTipStonesIcon.blp', 0, true)
+		BlzFrameSetSize(LumberIcon, 0.018, 0.018)
+		BlzFrameSetPoint(LumberIcon, FRAMEPOINT_RIGHT, InfoBackdrop, FRAMEPOINT_RIGHT, -0.038, -0.008)
+		
+		local LumberText = BlzGetFrameByName('ResourceBarLumberText', 0)
+		BlzFrameClearAllPoints(LumberText)
+		BlzFrameSetPoint(LumberText, FRAMEPOINT_LEFT, LumberIcon, FRAMEPOINT_LEFT, 0.018, 0)
+		
+		local InvBackdrop = {}
+		for i = 0, 5 do
+			InvBackdrop[i] = BlzCreateFrame('Item-Backdrop', WorldFrame, 0, 0)
+			BlzFrameSetSize(InvBackdrop[i], 0.034, 0.034)
+			if i == 0 then
+				BlzFrameSetPoint(InvBackdrop[i], FRAMEPOINT_TOPLEFT, PortraitBackdrop, FRAMEPOINT_TOPRIGHT, 0, -0.012)
+			else
+				BlzFrameSetPoint(InvBackdrop[i], FRAMEPOINT_LEFT, InvBackdrop[i - 1], FRAMEPOINT_RIGHT, 0, 0)
+			end
+			local item = BlzGetOriginFrame(ORIGIN_FRAME_ITEM_BUTTON, i)
+			BlzFrameClearAllPoints(item)
+			BlzFrameSetPoint(item, FRAMEPOINT_CENTER, InvBackdrop[i], FRAMEPOINT_CENTER, 0, 0)
+		end
+		
+		local BtnBackdrop = {}
+		for i = 0, 11 do
+			BtnBackdrop[i] = BlzCreateFrame('Button-Backdrop', WorldFrame, 0, 0)
+			BlzFrameSetSize(BtnBackdrop[i], 0.044, 0.044)
+			if i == 0 then
+				BlzFrameSetPoint(BtnBackdrop[i], FRAMEPOINT_BOTTOMLEFT, MapBackdrop, FRAMEPOINT_TOPRIGHT, -0.024, 0.008)
+			else
+				BlzFrameSetPoint(BtnBackdrop[i], FRAMEPOINT_LEFT, BtnBackdrop[i - 1], FRAMEPOINT_RIGHT, 0, 0)
+			end
+		end
+		
+		local MenuBtn = {}
+		for i = 0, 3 do
+			MenuBtn[i] = BlzGetOriginFrame(ORIGIN_FRAME_SYSTEM_BUTTON, i)
+			BlzFrameClearAllPoints(MenuBtn[i])
+			if i == 0 then
+				BlzFrameSetPoint(MenuBtn[i], FRAMEPOINT_TOPLEFT, InfoBackdrop, FRAMEPOINT_TOPRIGHT, 0, 0)
+			else
+				BlzFrameSetPoint(MenuBtn[i], FRAMEPOINT_TOP, MenuBtn[i - 1], FRAMEPOINT_BOTTOM, 0, 0)
+			end
+			BlzFrameSetSize(MenuBtn[i], 0.2, 0.022)
 		end
 		
 		TimerStart(CreateTimer(), 0, false, function()
@@ -102,6 +155,17 @@ do
 					BlzFrameSetPoint(frame[i], FRAMEPOINT_BOTTOMLEFT, frame[i + 1], FRAMEPOINT_TOPLEFT, 0, 0)
 				end
 			end
+			
+			for i = 0, 11 do
+				local btn = BlzGetOriginFrame(ORIGIN_FRAME_COMMAND_BUTTON, i)
+				BlzFrameClearAllPoints(btn)
+				BlzFrameSetPoint(btn, FRAMEPOINT_CENTER, BtnBackdrop[i], FRAMEPOINT_CENTER, 0, 0)
+			end
+			
+			for i = 0, 3 do
+				BlzFrameSetSize(MenuBtn[i], 0.07, 0.022)
+			end
+			
 			DestroyTimer(GetExpiredTimer())
 			
 			local X, Y = GetPlayerStartLocationX(GetLocalPlayer()), GetPlayerStartLocationY(GetLocalPlayer())
@@ -116,7 +180,6 @@ do
 			V = V + add
 			ClearTextMessages()
 			print(V)
-			BlzFrameSetPoint(MapBtnPing, FRAMEPOINT_TOPRIGHT, MapBackdrop, FRAMEPOINT_TOPRIGHT, V, V)
 		end
 		--} TEST
 		

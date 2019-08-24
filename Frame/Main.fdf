@@ -1,8 +1,24 @@
+Frame "BACKDROP" "Button-Backdrop" {
+    BackdropBackground  "UI/Widgets/Console/Human/human-inventory-slotfiller.blp",
+    BackdropCornerFlags "UL|UR|BL|BR|T|L|B|R",
+    BackdropCornerSize  0.01,
+    BackdropEdgeFile  "UI/Widgets/ToolTips/Human/human-tooltip-border.blp",
+    BackdropBackgroundInsets 0.0022 0.0022 0.0022 0.0022 // R T B L
+}
+
+Frame "BACKDROP" "Item-Backdrop" {
+    BackdropBackground  "UI/Widgets/Console/Human/human-inventory-slotfiller.blp",
+    BackdropCornerFlags "UL|UR|BL|BR|T|L|B|R",
+    BackdropCornerSize  0.01,
+    BackdropEdgeFile  "UI/Widgets/glues/gluescreen-scrollbar-backdropborder.blp",
+    BackdropBackgroundInsets 0.0022 0.0022 0.0022 0.0022 // R T B L
+}
+
 Frame "BACKDROP" "Steel-Backdrop" {
     BackdropBackground  "UI/Texture/Transparent.blp",
     BackdropCornerFlags "UL|UR|BL|BR|T|L|B|R",
     BackdropCornerSize  0.02,
-    BackdropEdgeFile  "UI/Widgets/EscMenu/Human/steel-options-menu-border.blp",
+    BackdropEdgeFile  "UI/Widgets/BattleNet/bnet-dialoguebox-border.blp",
     BackdropBackgroundInsets 0.0022 0.0022 0.0022 0.0022 // R T B L
 }
 
@@ -10,10 +26,17 @@ Frame "BACKDROP" "Info-Backdrop" {
     BackdropBackground  "UI/Texture/Transparent.blp",
     BackdropCornerFlags "UR|BR|T|B|R",
     BackdropCornerSize  0.02,
-    BackdropEdgeFile  "UI/Widgets/EscMenu/Human/steel-options-menu-border.blp",
+    BackdropEdgeFile  "UI/Widgets/BattleNet/bnet-dialoguebox-border.blp",
     BackdropBackgroundInsets 0.0022 0.0022 0.0022 0.02 // R T B L
 }
 
+Frame "BACKDROP" "Map-Backdrop" {
+    BackdropBackground  "UI/Texture/Transparent.blp",
+    BackdropCornerFlags "UL|UR|BL|BR|T|L|B|R",
+    BackdropCornerSize  0.02,
+    BackdropEdgeFile  "UI/Widgets/BattleNet/bnet-inputbox-border.blp",
+    BackdropBackgroundInsets 0.0022 0.0022 0.0022 0.0022 // R T B L
+}
 
 Frame "BACKDROP" "Portrait-Backdrop" {
     Width 0.106,
@@ -24,46 +47,3 @@ Frame "BACKDROP" "Portrait-Backdrop" {
     BackdropEdgeFile  "UI/Widgets/EscMenu/Human/sindorei-options-menu-border.blp",
     BackdropBackgroundInsets 0.106 0 0 0
 }
-
-// -- LOCAL TEMPLATES -------------------------------------------------------
-Frame "BACKDROP" "BoxedTextBackgroundTemplate" {
-		DecorateFileNames, //Look-Up Names in some String table (for example gameinterface)
-        BackdropTileBackground, //Tile mode enabled
-		BackdropBackground  "ToolTipBackground", //BackgroundFile
-        BackdropCornerFlags "UL|UR|BL|BR|T|L|B|R",
-        BackdropCornerSize  0.008, //higher numbers make the corners bigger.
-        BackdropBackgroundInsets 0.0022 0.0022 0.0022 0.0022, //makes the background smaller, from the outside.
-        BackdropEdgeFile  "ToolTipBorder", //the border File
-        BackdropBlendAll,
-}
-// -- Frames -------------------------------------------------------
-Frame "BACKDROP" "BoxedText" INHERITS "BoxedTextBackgroundTemplate" {
-	UseActiveContext,
-	
-	Frame "TEXT" "BoxedTextTitle" {
-		UseActiveContext,
-		DecorateFileNames,
-		SetPoint TOPLEFT, "BoxedText", TOPLEFT, 0.005, -0.005, //Positionate "BoxedTextSimpleTitle"'s TOPLEFT to "BoxedText"'s TOPLEFT with an offset
-		SetPoint TOPRIGHT, "BoxedText", TOPRIGHT, -0.005, -0.005,
-		FontFlags "FIXEDSIZE",
-		FrameFont "MasterFont", 0.014, "",
-		FontColor 1.0 1.0 1.0 1.0, //Red Green Blue Alpha 0.0 to 1.0
-		FontShadowColor 0.0 0.0 0.0 0.9,
-		FontShadowOffset 0.001 -0.001,
-	}
-	
-	Frame "TEXT" "BoxedTextValue" {
-		UseActiveContext,
-		DecorateFileNames,
-		SetPoint TOPLEFT, "BoxedText", TOPLEFT, 0.005, -0.02,
-		SetPoint BOTTOMRIGHT,  "BoxedText", BOTTOMRIGHT, -0.005, 0.005,
-		FontFlags "FIXEDSIZE",
-		FrameFont "MasterFont", 0.012, "",
-		FontColor 1.0 1.0 1.0 1.0,
-		FontShadowColor 0.0 0.0 0.0 0.9,
-		FontShadowOffset 0.001 -0.001,
-	}
-}
-
-
-
