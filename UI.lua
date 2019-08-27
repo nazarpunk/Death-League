@@ -12,6 +12,7 @@ do
 		EnableSelect(false, false)
 		
 		BlzEnableUIAutoPosition(false)
+		ShowInterface(false, 0)
 		
 		BlzLoadTOCFile('UI/Frame/Main.toc')
 		
@@ -21,16 +22,21 @@ do
 		
 		local Portrait = BlzGetOriginFrame(ORIGIN_FRAME_PORTRAIT, 0)
 		BlzFrameClearAllPoints(Portrait)
-		BlzFrameSetAbsPoint(Portrait, FRAMEPOINT_CENTER, 0.288, 0.096)
+		BlzFrameSetAbsPoint(Portrait, FRAMEPOINT_CENTER, 0.288, 0.095)
 		
-		local InfoBackdrop     = BlzCreateFrame('Info-Backdrop', WorldFrame, 0, 0)
+		local InfoBackdrop     = BlzCreateFrame('Steel-Backdrop', WorldFrame, 0, 0)
 		local PortraitBackdrop = BlzCreateFrame('Portrait-Backdrop', GameUI, 0, 0)
 		BlzFrameSetPoint(PortraitBackdrop, FRAMEPOINT_TOP, Portrait, FRAMEPOINT_TOP, -0.037, 0.008)
-		BlzFrameSetPoint(InfoBackdrop, FRAMEPOINT_BOTTOMLEFT, PortraitBackdrop, FRAMEPOINT_BOTTOMRIGHT, -0.024, 0.012)
-		BlzFrameSetSize(InfoBackdrop, 0.18, 0.058)
+		BlzFrameSetPoint(InfoBackdrop, FRAMEPOINT_BOTTOMLEFT, PortraitBackdrop, FRAMEPOINT_BOTTOMRIGHT, 0, 0)
+		BlzFrameSetSize(InfoBackdrop, 0.172, 0.072)
 		
-		local width, height, alpha = 0.089, 0.014, 100
-		local LevelBar             = BlzGetFrameByName('SimpleHeroLevelBar', 0)
+		local StatusBackdrop = BlzCreateFrame('Steel-Backdrop', WorldFrame, 0, 0)
+		BlzFrameSetPoint(StatusBackdrop, FRAMEPOINT_TOPRIGHT, InfoBackdrop, FRAMEPOINT_BOTTOMRIGHT, 0, -0.002)
+		BlzFrameSetPoint(StatusBackdrop, FRAMEPOINT_TOPLEFT, InfoBackdrop, FRAMEPOINT_BOTTOMLEFT, 0.02, -0.002)
+		BlzFrameSetSize(StatusBackdrop, 0, 0.024)
+		
+		local width, height = 0.089, 0.014
+		local LevelBar      = BlzGetFrameByName('SimpleHeroLevelBar', 0)
 		BlzFrameClearAllPoints(LevelBar)
 		BlzFrameSetPoint(LevelBar, FRAMEPOINT_TOPLEFT, Portrait, FRAMEPOINT_BOTTOMLEFT, -0.048, 0)
 		BlzFrameSetSize(LevelBar, width, height)
@@ -45,11 +51,9 @@ do
 		BlzFrameSetParent(HpBar, WorldFrame)
 		BlzFrameSetPoint(HpBar, FRAMEPOINT_TOP, LevelBar, FRAMEPOINT_BOTTOM, 0, -0.008)
 		BlzFrameSetSize(HpBar, width, height)
-		BlzFrameSetAlpha(HpBar, alpha)
 		
 		local MpBar = BlzGetOriginFrame(ORIGIN_FRAME_HERO_MANA_BAR, 0)
 		BlzFrameSetSize(MpBar, width, height)
-		BlzFrameSetAlpha(MpBar, alpha)
 		
 		local frames = { { '', 0 }, { '', 2 }, { 'HeroStrength', 6 }, { 'HeroAgility', 6 }, { 'HeroIntellect', 6 } }
 		local frame  = {}
@@ -114,21 +118,24 @@ do
 			InvBackdrop[i] = BlzCreateFrame('Item-Backdrop', WorldFrame, 0, 0)
 			BlzFrameSetSize(InvBackdrop[i], 0.034, 0.034)
 			if i == 0 then
-				BlzFrameSetPoint(InvBackdrop[i], FRAMEPOINT_TOPLEFT, PortraitBackdrop, FRAMEPOINT_TOPRIGHT, 0, -0.012)
+				BlzFrameSetPoint(InvBackdrop[i], FRAMEPOINT_TOPLEFT, InfoBackdrop, FRAMEPOINT_TOPRIGHT, 0, 0)
+			elseif i < 2 then
+				BlzFrameSetPoint(InvBackdrop[i], FRAMEPOINT_LEFT, InvBackdrop[i - 1], FRAMEPOINT_RIGHT, -0.001, 0)
 			else
-				BlzFrameSetPoint(InvBackdrop[i], FRAMEPOINT_LEFT, InvBackdrop[i - 1], FRAMEPOINT_RIGHT, 0, 0)
+				BlzFrameSetPoint(InvBackdrop[i], FRAMEPOINT_TOP, InvBackdrop[i - 2], FRAMEPOINT_BOTTOM, 0, 0.001)
 			end
 			local item = BlzGetOriginFrame(ORIGIN_FRAME_ITEM_BUTTON, i)
 			BlzFrameClearAllPoints(item)
+			--BlzFrameSetSize(item, 0.026, 0.026)
 			BlzFrameSetPoint(item, FRAMEPOINT_CENTER, InvBackdrop[i], FRAMEPOINT_CENTER, 0, 0)
 		end
 		
 		local BtnBackdrop = {}
-		for i = 0, 11 do
+		for i = 5, 11 do
 			BtnBackdrop[i] = BlzCreateFrame('Button-Backdrop', WorldFrame, 0, 0)
 			BlzFrameSetSize(BtnBackdrop[i], 0.044, 0.044)
-			if i == 0 then
-				BlzFrameSetPoint(BtnBackdrop[i], FRAMEPOINT_BOTTOMLEFT, MapBackdrop, FRAMEPOINT_TOPRIGHT, -0.024, 0.008)
+			if i == 5 then
+				BlzFrameSetPoint(BtnBackdrop[i], FRAMEPOINT_TOPLEFT, PortraitBackdrop, FRAMEPOINT_TOPRIGHT, 0, 0)
 			else
 				BlzFrameSetPoint(BtnBackdrop[i], FRAMEPOINT_LEFT, BtnBackdrop[i - 1], FRAMEPOINT_RIGHT, 0, 0)
 			end
@@ -139,32 +146,46 @@ do
 			MenuBtn[i] = BlzGetOriginFrame(ORIGIN_FRAME_SYSTEM_BUTTON, i)
 			BlzFrameClearAllPoints(MenuBtn[i])
 			if i == 0 then
-				BlzFrameSetPoint(MenuBtn[i], FRAMEPOINT_TOPLEFT, InfoBackdrop, FRAMEPOINT_TOPRIGHT, 0, 0)
+				BlzFrameSetPoint(MenuBtn[i], FRAMEPOINT_BOTTOMLEFT, InvBackdrop[5], FRAMEPOINT_BOTTOMRIGHT, 0, 0)
 			else
-				BlzFrameSetPoint(MenuBtn[i], FRAMEPOINT_TOP, MenuBtn[i - 1], FRAMEPOINT_BOTTOM, 0, 0)
+				BlzFrameSetPoint(MenuBtn[i], FRAMEPOINT_BOTTOM, MenuBtn[i - 1], FRAMEPOINT_TOP, 0, 0.004)
 			end
 			BlzFrameSetSize(MenuBtn[i], 0.2, 0.022)
 		end
 		
 		TimerStart(CreateTimer(), 0, false, function()
-			BlzFrameSetPoint(frame[#frames], FRAMEPOINT_BOTTOMLEFT, PortraitBackdrop, FRAMEPOINT_BOTTOMRIGHT, 0, 0)
-			for i = #frames, 1, -1 do
-				if i == #frames then
-					BlzFrameSetPoint(frame[i], FRAMEPOINT_BOTTOMLEFT, PortraitBackdrop, FRAMEPOINT_BOTTOMRIGHT, 0, 0.02)
+			for i = 1, #frames do
+				if i == 3 then
+					BlzFrameSetPoint(frame[i], FRAMEPOINT_LEFT, InfoBackdrop, FRAMEPOINT_LEFT, 0.01, 0)
+				elseif i > 3 then
+					BlzFrameSetPoint(frame[i], FRAMEPOINT_TOPLEFT, frame[i - 1], FRAMEPOINT_BOTTOMLEFT, 0, -0.003)
 				else
-					BlzFrameSetPoint(frame[i], FRAMEPOINT_BOTTOMLEFT, frame[i + 1], FRAMEPOINT_TOPLEFT, 0, 0)
+					BlzFrameSetPoint(frame[i], FRAMEPOINT_BOTTOMLEFT, frame[i + 1], FRAMEPOINT_TOPLEFT, 0, 0.003)
 				end
 			end
 			
 			for i = 0, 11 do
 				local btn = BlzGetOriginFrame(ORIGIN_FRAME_COMMAND_BUTTON, i)
 				BlzFrameClearAllPoints(btn)
-				BlzFrameSetPoint(btn, FRAMEPOINT_CENTER, BtnBackdrop[i], FRAMEPOINT_CENTER, 0, 0)
+				if i <= 4 then
+					BlzFrameSetPoint(btn, FRAMEPOINT_TOPRIGHT, WorldFrame, FRAMEPOINT_BOTTOMLEFT, 0, 0)
+				else
+					BlzFrameSetPoint(btn, FRAMEPOINT_CENTER, BtnBackdrop[i], FRAMEPOINT_CENTER, 0, 0)
+				end
 			end
 			
 			for i = 0, 3 do
 				BlzFrameSetSize(MenuBtn[i], 0.07, 0.022)
 			end
+			
+			local UberTooltip = BlzGetOriginFrame(ORIGIN_FRAME_UBERTOOLTIP, 0)
+			BlzFrameClearAllPoints(UberTooltip)
+			BlzFrameSetAbsPoint(UberTooltip, FRAMEPOINT_BOTTOM, 0.4, 0.148)
+			
+			ShowInterface(true, 0)
+			BlzFrameSetVisible(Portrait, true)
+			BlzFrameSetAlpha(HpBar, 100)
+			BlzFrameSetAlpha(MpBar, 100)
 			
 			DestroyTimer(GetExpiredTimer())
 			
@@ -175,7 +196,7 @@ do
 		end)
 		
 		--{ TEST
-		local V = 0
+		local V = 0.198
 		local function change(add)
 			V = V + add
 			ClearTextMessages()

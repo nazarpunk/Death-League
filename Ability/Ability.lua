@@ -1,1 +1,2 @@
-Ability = {}
+ABILITY       = {}
+ABILITY_INDEX = {}

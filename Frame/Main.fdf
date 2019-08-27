@@ -22,14 +22,6 @@ Frame "BACKDROP" "Steel-Backdrop" {
     BackdropBackgroundInsets 0.0022 0.0022 0.0022 0.0022 // R T B L
 }
 
-Frame "BACKDROP" "Info-Backdrop" {
-    BackdropBackground  "UI/Texture/Transparent.blp",
-    BackdropCornerFlags "UR|BR|T|B|R",
-    BackdropCornerSize  0.02,
-    BackdropEdgeFile  "UI/Widgets/BattleNet/bnet-dialoguebox-border.blp",
-    BackdropBackgroundInsets 0.0022 0.0022 0.0022 0.02 // R T B L
-}
-
 Frame "BACKDROP" "Map-Backdrop" {
     BackdropBackground  "UI/Texture/Transparent.blp",
     BackdropCornerFlags "UL|UR|BL|BR|T|L|B|R",
