@@ -19,7 +19,15 @@ Frame "BACKDROP" "Steel-Backdrop" {
     BackdropCornerFlags "UL|UR|BL|BR|T|L|B|R",
     BackdropCornerSize  0.02,
     BackdropEdgeFile  "UI/Widgets/BattleNet/bnet-dialoguebox-border.blp",
-    BackdropBackgroundInsets 0.0022 0.0022 0.0022 0.0022 // R T B L
+    BackdropBackgroundInsets 0.005 0.005 0.005 0.005 // R T B L
+}
+
+Frame "BACKDROP" "HP-Backdrop" {
+    BackdropBackground  "UI/Texture/Transparent.blp",
+    BackdropCornerFlags "UL|UR|BL|BR|T|L|B|R",
+    BackdropCornerSize  0.01,
+    BackdropEdgeFile  "UI/Widgets/BattleNet/bnet-inputbox-border.blp",
+    BackdropBackgroundInsets 0.001 0.001 0.001 0.001 // R T B L
 }
 
 Frame "BACKDROP" "Map-Backdrop" {
