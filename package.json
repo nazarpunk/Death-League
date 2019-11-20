@@ -1,0 +1,16 @@
+{
+  "name": "wc3-spell",
+  "version": "1.0.0",
+  "private": true,
+  "keywords": [],
+  "author": "nazarpunk",
+  "contributors": [],
+  "license": "UNLICENSED",
+  "dependencies": {
+    "gulp": "^4.0.2",
+    "gulp-concat": "^2.6.1",
+    "gulp-exec": "^4.0.0",
+    "npm": "^6.13.1"
+  },
+  "devDependencies": {}
+}

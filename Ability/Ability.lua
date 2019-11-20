@@ -1,2 +1,0 @@
-ABILITY       = {}
-ABILITY_INDEX = {}
