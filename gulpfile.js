@@ -22,7 +22,10 @@ const watch = () => {
 gulp.task('watch', watch);
 
 const run = (cb) => {
-    exec(`start explorer`, (err) => {
+
+    exec(`start "" "C:\\Program Files (x86)\\foobar2000\\foobar2000.exe"`, (err, stdout, stderr) => {
+        console.log(stdout);
+        console.warn(stderr);
         cb(err)
     });
     return gulp;
