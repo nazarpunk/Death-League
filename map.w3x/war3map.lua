@@ -1,8 +1,17 @@
 function InitGlobals()
 end
 
---mycode
---customcode
+--INJECT-START
+
+
+print('test1')
+
+
+print('test2')
+
+
+
+--INJECT-END
 function InitCustomPlayerSlots()
     SetPlayerStartLocation(Player(0), 0)
     SetPlayerColor(Player(0), ConvertPlayerColor(0))
@@ -32,7 +41,7 @@ function config()
     SetPlayers(1)
     SetTeams(1)
     SetGamePlacement(MAP_PLACEMENT_USE_MAP_SETTINGS)
-    DefineStartLocation(0, -1937.9, 1321.8)
+    DefineStartLocation(0, -832.0, -1664.0)
     InitCustomPlayerSlots()
     SetPlayerSlotAvailable(Player(0), MAP_CONTROL_USER)
     InitGenericPlayerSlots()

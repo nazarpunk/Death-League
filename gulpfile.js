@@ -1,10 +1,12 @@
 const gulp = require(`gulp`);
 const concat = require(`gulp-concat`);
 const exec = require('child_process').exec;
+const inject = require('gulp-inject-string');
 
 const path = {
     game: `D:\\Games\\Warcraft III\\x86_64`,
-    map: `test.w3x`
+    map: `map.w3x`,
+    file: `custom-code.lua`
 };
 
 const build = () => {
@@ -12,8 +14,19 @@ const build = () => {
         .src([
             `build/**/*.lua`
         ])
-        .pipe(concat(`war3map.lua`))
-        .pipe(gulp.dest(`src`));
+        .pipe(concat(path.file))
+        .pipe(inject.prepend(`--INJECT-START\r\n`))
+        .pipe(inject.append(`\r\n--INJECT-END`))
+        .pipe(gulp.dest(`.`));
+};
+
+const replace = (cb) => {
+    exec(`start "" "%cd%\\custom-code-replacer.exe" "%cd%\\${path.map}\\war3map.wct" "%cd%\\${path.file}"`, (err, stdout, stderr) => {
+            console.log(stdout);
+            console.warn(stderr);
+            cb(err);
+        }
+    );
 };
 
 const watch = () => {
@@ -37,7 +50,7 @@ const open = (cb, isGame) => {
     );
 };
 
-gulp.task('build', build);
+gulp.task('build', gulp.series(build, replace));
 
 const openInGame = (cb) => {
     open(cb, true);
