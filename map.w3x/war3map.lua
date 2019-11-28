@@ -1,9 +1,14 @@
 function InitGlobals()
 end
 
---CODE-BEFORE
-
---CODE-AFTER
+--CUSTOM_CODE
+print('Ability')
+print('Ability_1')
+print('Ability_2')
+print('Lib 1')
+print('Lib 2')
+print('Init Catchers')
+--CUSTOM_CODE
 function InitCustomPlayerSlots()
     SetPlayerStartLocation(Player(0), 0)
     SetPlayerColor(Player(0), ConvertPlayerColor(0))
@@ -33,7 +38,7 @@ function config()
     SetPlayers(1)
     SetTeams(1)
     SetGamePlacement(MAP_PLACEMENT_USE_MAP_SETTINGS)
-    DefineStartLocation(0, -832.0, -1664.0)
+    DefineStartLocation(0, -2688.0, 2560.0)
     InitCustomPlayerSlots()
     SetPlayerSlotAvailable(Player(0), MAP_CONTROL_USER)
     InitGenericPlayerSlots()

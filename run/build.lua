@@ -10,8 +10,7 @@ local param = {
 		[[\build\Libs]],
 		[[\build\Init.lua]],
 	},
-	before  = [[--CODE-BEFORE]],
-	after   = [[--CODE-AFTER]],
+	tag     = [[--CUSTOM_CODE]], -- тэг для вставки кода
 	current = lfs.currentdir() -- текущая папка проэкта
 }
 
@@ -24,7 +23,7 @@ end
 
 -- собираем всё в один файл
 local output = io.open(param.current .. param.output, 'w+')
-output:write(param.before, '\n')
+output:write(param.tag, '\n')
 for i = 1, #param.files do
 	local file = param.files[i]
 	local path = param.current .. file
@@ -38,7 +37,20 @@ for i = 1, #param.files do
 		end
 	end
 end
-output:write(param.after)
+
+output:write(param.tag)
+output:close()
+
+-- заменяем код в war3map.lua
+local path    = param.current .. param.map .. '\\war3map.lua'
+local war3map = io.open(path, 'r')
+output        = io.open(param.current .. param.output, 'r')
+local content = war3map:read('*a')
+war3map:close()
+war3map           = io.open(path, 'w+')
+local repl, count = string.gsub(content, param.tag .. '.*' .. param.tag, output:read('*a'))
+war3map:write(repl)
+war3map:close()
 output:close()
 
 -- патчим .wct
@@ -53,4 +65,3 @@ end
 if type(IsRunEditor) == 'boolean' then
 	os.execute('start  "" "' .. param.game .. '\\' .. 'World Editor.exe" -loadfile "' .. param.current .. '\\' .. param.map .. '"')
 end
-
