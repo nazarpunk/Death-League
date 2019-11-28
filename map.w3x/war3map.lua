@@ -1,17 +1,9 @@
 function InitGlobals()
 end
 
---INJECT-START
+--CODE-BEFORE
 
-
-print('test1')
-
-
-print('test2')
-
-
-
---INJECT-END
+--CODE-AFTER
 function InitCustomPlayerSlots()
     SetPlayerStartLocation(Player(0), 0)
     SetPlayerColor(Player(0), ConvertPlayerColor(0))
