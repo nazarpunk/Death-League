@@ -1,0 +1,12 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="run-in-game.lua" type="lua.app" factoryName="Lua Application">
+    <option name="program" value="C:\Lua\bin\lua.exe" />
+    <option name="file" value="$PROJECT_DIR$/run/run-in-game.lua" />
+    <option name="workingDir" value="C:\Users\nazarpunk\IdeaProjects\Death-League" />
+    <option name="debuggerType" value="1" />
+    <option name="params" value="" />
+    <option name="charset" value="UTF-8" />
+    <option name="showConsole" value="true" />
+    <method v="2" />
+  </configuration>
+</component>

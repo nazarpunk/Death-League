@@ -1,25 +1,20 @@
-require 'lfs'
+require 'lfs' -- подключаем LuaFileSystem https://keplerproject.github.io/luafilesystem/manual.html
 local param = {
 	game       = [[D:\Games\Warcraft III\x86_64]], -- папка с игрой
 	map        = [[\map.w3x]], -- папка с картой
 	customCode = [[\custom-code.lua]], -- файл, в который собирается весь код
 	patcher    = [[\custom-code-replacer.exe]], -- патчер для .wct
-	lib        = [[\run\lib]], -- папка с нужными для сборки функциями
 	files      = { -- порядок сборки файлов
-		[[\build\Ability]],
-		[[\build\Libs]],
-		[[\build\Init.lua]],
+		[[\build\libs]],
+		[[\build\init.lua]]
 	},
 	tag        = [[--CUSTOM_CODE]], -- тэг для вставки кода
 	current    = lfs.currentdir() -- текущая папка проэкта
 }
 
 -- подключаем нужные функции
-for file in lfs.dir(param.current .. param.lib) do
-	if lfs.attributes(file, 'mode') ~= 'directory' then
-		dofile(param.current .. param.lib .. '\\' .. file)
-	end
-end
+dofile(param.current .. [[\run\lib\DirTree.lua]])
+dofile(param.current .. [[\run\lib\FileContent.lua]])
 
 -- собираем всё в один файл
 local customCode = io.open(param.current .. param.customCode, 'w+')
@@ -37,7 +32,6 @@ for i = 1, #param.files do
 		end
 	end
 end
-
 customCode:write(param.tag)
 customCode:close()
 
