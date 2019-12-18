@@ -2,7 +2,9 @@ do
 	local InitGlobalsOrigin = InitGlobals
 	function InitGlobals()
 		InitGlobalsOrigin()
-		
-		print(123)
+		FogEnable(false)
+		FogMaskEnable(false)
+	
+	
 	end
 end
