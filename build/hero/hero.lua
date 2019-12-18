@@ -2,59 +2,50 @@ do
 	local InitGlobalsOrigin = InitGlobals
 	function InitGlobals()
 		InitGlobalsOrigin()
+		local SkillId            = FourCC('aup1')
 		
 		-- enter map
-		local heroEnterTrigger = CreateTrigger()
-		local mapRegion        = CreateRegion()
+		local enterRegionTrigger = CreateTrigger()
+		local mapRegion          = CreateRegion()
 		RegionAddRect(mapRegion, bj_mapInitialPlayableArea)
-		for i = 0, bj_MAX_PLAYER_SLOTS - 1 do
-			TriggerRegisterEnterRegion(heroEnterTrigger, mapRegion, nil)
-		end
-		TriggerAddAction(heroEnterTrigger, function()
-			local unit   = GetTriggerUnit()
-			local player = GetOwningPlayer(unit)
-			if GetPlayerController(player) ~= MAP_CONTROL_USER or
-					GetPlayerSlotState(player) ~= PLAYER_SLOT_STATE_PLAYING or
-					not IsUnitType(unit, UNIT_TYPE_HERO) or
-					IsUnitIllusion(unit)
-			then return end
-			if GetLocalPlayer() == player then
-				SelectUnit(unit, true)
-				PanCameraToTimed(GetUnitX(unit), GetUnitY(unit), 0)
-				AddUnitToStock(unit, FourCC('hfoo'), 10, 10)
-				AddItemToStock(unit, FourCC('aup1'), 10, 10)
+		TriggerRegisterEnterRegion(enterRegionTrigger, mapRegion, nil)
+		TriggerAddAction(enterRegionTrigger, function()
+			local unit     = GetTriggerUnit()
+			local unitId   = GetUnitTypeId(unit)
+			local player   = GetOwningPlayer(unit)
+			local playerId = GetPlayerId(player)
+			-- skill
+			if unitId >= SkillId and unitId < SkillId + 4 then
+				local num = unitId - SkillId + 1
+				print(playerId, num)
+				return RemoveUnit(unit)
 			end
-		end)
-		
-		-- item update
-		local ItemTrigger = CreateTrigger()
-		for i = 0, bj_MAX_PLAYER_SLOTS - 1 do
-			local player = Player(i)
-			TriggerRegisterPlayerUnitEvent(ItemTrigger, player, EVENT_PLAYER_UNIT_PICKUP_ITEM)
-			TriggerRegisterPlayerUnitEvent(ItemTrigger, player, EVENT_PLAYER_UNIT_DROP_ITEM)
-			TriggerRegisterPlayerUnitEvent(ItemTrigger, player, EVENT_PLAYER_UNIT_SELL_ITEM)
-			TriggerRegisterPlayerUnitEvent(ItemTrigger, player, EVENT_PLAYER_UNIT_USE_ITEM)
-			TriggerRegisterPlayerUnitEvent(ItemTrigger, player, EVENT_PLAYER_UNIT_PAWN_ITEM)
-		end
-		
-		TriggerAddAction(ItemTrigger, function()
-			local eventId       = GetHandleId(GetTriggerEventId())
-			local isEventPickUp = eventId == GetHandleId(EVENT_PLAYER_UNIT_PICKUP_ITEM)
-			local isEventDrop   = eventId == GetHandleId(EVENT_PLAYER_UNIT_DROP_ITEM)
-			local isEventSell   = eventId == GetHandleId(EVENT_PLAYER_UNIT_SELL_ITEM)
-			local isEventUse    = eventId == GetHandleId(EVENT_PLAYER_UNIT_USE_ITEM)
-			local isEventPawn   = eventId == GetHandleId(EVENT_PLAYER_UNIT_PAWN_ITEM)
 			
-			--{ FIXME DEBUG
-			if true then
-				print('-----------------------')
-				print('pickup', isEventPickUp)
-				print('drop', isEventDrop)
-				print('sell', isEventSell)
-				print('use', isEventUse)
-				print('pawn', isEventPawn)
+			-- hero
+			if GetPlayerController(player) == MAP_CONTROL_USER and
+					GetPlayerSlotState(player) == PLAYER_SLOT_STATE_PLAYING and
+					IsUnitType(unit, UNIT_TYPE_HERO) and
+					not IsUnitIllusion(unit)
+			then
+				PLAYER.hero = unit
+				for i = 0, 3 do
+					AddUnitToStock(unit, SkillId + i, 3, 3)
+				end
+				for i = 0, 8 do
+					local ability = BlzGetUnitAbilityByIndex(unit, i)
+					print(i,
+					      ability,
+					      BlzGetAbilityIntegerField(ability, ABILITY_IF_BUTTON_POSITION_NORMAL_X),
+					      BlzGetAbilityIntegerField(ability, ABILITY_IF_BUTTON_POSITION_NORMAL_Y)
+					)
+				end
+				
+				if GetLocalPlayer() == player then
+					SelectUnit(unit, true)
+					PanCameraToTimed(GetUnitX(unit), GetUnitY(unit), 0)
+				end
+				return
 			end
-			--}
 		end)
 		
 		-- create test unit
