@@ -6,6 +6,7 @@ local param = {
 	patcher    = [[\custom-code-replacer.exe]], -- патчер для .wct
 	files      = { -- порядок сборки файлов
 		[[\build\libs]],
+		[[\build\hero]],
 		[[\build\init.lua]]
 	},
 	tag        = [[--CUSTOM_CODE]], -- тэг для вставки кода
