@@ -7,12 +7,35 @@ function CreateUnitsForPlayer0()
     local unitID
     local t
     local life
-    u = CreateUnit(p, FourCC("Hpal"), -343.3, 784.6, 277.060)
-    u = CreateUnit(p, FourCC("Hblm"), 576.7, 846.2, 280.822)
-    u = CreateUnit(p, FourCC("Ulic"), 437.3, 819.1, 299.418)
-    u = CreateUnit(p, FourCC("Udre"), -174.5, 799.2, 275.395)
-    u = CreateUnit(p, FourCC("Edem"), 258.9, 815.6, 259.169)
-    u = CreateUnit(p, FourCC("Ewar"), 61.1, 823.8, 278.967)
+    u = CreateUnit(p, FourCC("ncrb"), -19.4, 1835.9, 294.200)
+end
+
+function CreateNeutralPassiveBuildings()
+    local p = Player(PLAYER_NEUTRAL_PASSIVE)
+    local u
+    local unitID
+    local t
+    local life
+    u = CreateUnit(p, FourCC("tStr"), -256.0, 1984.0, 270.000)
+    SetUnitColor(u, ConvertPlayerColor(0))
+    u = CreateUnit(p, FourCC("tAgi"), 0.0, 1984.0, 270.000)
+    SetUnitColor(u, ConvertPlayerColor(6))
+    u = CreateUnit(p, FourCC("tInt"), 256.0, 1984.0, 270.000)
+    SetUnitColor(u, ConvertPlayerColor(1))
+end
+
+function CreateNeutralPassive()
+    local p = Player(PLAYER_NEUTRAL_PASSIVE)
+    local u
+    local unitID
+    local t
+    local life
+    u = CreateUnit(p, FourCC("Hpal"), -217.9, -198.1, 277.060)
+    u = CreateUnit(p, FourCC("Hblm"), 702.1, -136.6, 280.822)
+    u = CreateUnit(p, FourCC("Ulic"), 562.7, -163.6, 299.418)
+    u = CreateUnit(p, FourCC("Udre"), -49.0, -183.5, 275.395)
+    u = CreateUnit(p, FourCC("Edem"), 384.3, -167.2, 259.169)
+    u = CreateUnit(p, FourCC("Ewar"), 186.6, -159.0, 278.967)
 end
 
 function CreatePlayerBuildings()
@@ -23,7 +46,9 @@ function CreatePlayerUnits()
 end
 
 function CreateAllUnits()
+    CreateNeutralPassiveBuildings()
     CreatePlayerBuildings()
+    CreateNeutralPassive()
     CreatePlayerUnits()
 end
 
@@ -36,7 +61,7 @@ do
 		InitGlobalsOrigin()
 		FogEnable(false)
 		FogMaskEnable(false)
-	
+		MeleeStartingHeroLimit()
 	
 	end
 end
@@ -1899,7 +1924,7 @@ function InitAllyPriorities()
 end
 
 function main()
-    SetCameraBounds(-3328.0 + GetCameraMargin(CAMERA_MARGIN_LEFT), -3584.0 + GetCameraMargin(CAMERA_MARGIN_BOTTOM), 3328.0 - GetCameraMargin(CAMERA_MARGIN_RIGHT), 3072.0 - GetCameraMargin(CAMERA_MARGIN_TOP), -3328.0 + GetCameraMargin(CAMERA_MARGIN_LEFT), 3072.0 - GetCameraMargin(CAMERA_MARGIN_TOP), 3328.0 - GetCameraMargin(CAMERA_MARGIN_RIGHT), -3584.0 + GetCameraMargin(CAMERA_MARGIN_BOTTOM))
+    SetCameraBounds(-2048.0 + GetCameraMargin(CAMERA_MARGIN_LEFT), -2048.0 + GetCameraMargin(CAMERA_MARGIN_BOTTOM), 2048.0 - GetCameraMargin(CAMERA_MARGIN_RIGHT), 2048.0 - GetCameraMargin(CAMERA_MARGIN_TOP), -2048.0 + GetCameraMargin(CAMERA_MARGIN_LEFT), 2048.0 - GetCameraMargin(CAMERA_MARGIN_TOP), 2048.0 - GetCameraMargin(CAMERA_MARGIN_RIGHT), -2048.0 + GetCameraMargin(CAMERA_MARGIN_BOTTOM))
     SetDayNightModels("Environment\\DNC\\DNCDalaran\\DNCDalaranTerrain\\DNCDalaranTerrain.mdl", "Environment\\DNC\\DNCDalaran\\DNCDalaranUnit\\DNCDalaranUnit.mdl")
     NewSoundEnvironment("Default")
     SetAmbientDaySound("DalaranRuinsDay")
@@ -1916,30 +1941,30 @@ function config()
     SetPlayers(24)
     SetTeams(24)
     SetGamePlacement(MAP_PLACEMENT_TEAMS_TOGETHER)
-    DefineStartLocation(0, 256.0, 320.0)
-    DefineStartLocation(1, 256.0, 320.0)
-    DefineStartLocation(2, 256.0, 320.0)
-    DefineStartLocation(3, 256.0, 320.0)
-    DefineStartLocation(4, 256.0, 320.0)
-    DefineStartLocation(5, 256.0, 320.0)
-    DefineStartLocation(6, 256.0, 320.0)
-    DefineStartLocation(7, 256.0, 320.0)
-    DefineStartLocation(8, 256.0, 320.0)
-    DefineStartLocation(9, 256.0, 320.0)
-    DefineStartLocation(10, 256.0, 320.0)
-    DefineStartLocation(11, 256.0, 320.0)
-    DefineStartLocation(12, 256.0, 320.0)
-    DefineStartLocation(13, 256.0, 320.0)
-    DefineStartLocation(14, 256.0, 320.0)
-    DefineStartLocation(15, 256.0, 320.0)
-    DefineStartLocation(16, 256.0, 320.0)
-    DefineStartLocation(17, 256.0, 320.0)
-    DefineStartLocation(18, 256.0, 320.0)
-    DefineStartLocation(19, 256.0, 320.0)
-    DefineStartLocation(20, 256.0, 320.0)
-    DefineStartLocation(21, 256.0, 320.0)
-    DefineStartLocation(22, 256.0, 320.0)
-    DefineStartLocation(23, 256.0, 320.0)
+    DefineStartLocation(0, 0.0, 1792.0)
+    DefineStartLocation(1, 0.0, 1792.0)
+    DefineStartLocation(2, 0.0, 1792.0)
+    DefineStartLocation(3, 0.0, 1792.0)
+    DefineStartLocation(4, 0.0, 1792.0)
+    DefineStartLocation(5, 0.0, 1792.0)
+    DefineStartLocation(6, 0.0, 1792.0)
+    DefineStartLocation(7, 0.0, 1792.0)
+    DefineStartLocation(8, 0.0, 1792.0)
+    DefineStartLocation(9, 0.0, 1792.0)
+    DefineStartLocation(10, 0.0, 1792.0)
+    DefineStartLocation(11, 0.0, 1792.0)
+    DefineStartLocation(12, 0.0, 1792.0)
+    DefineStartLocation(13, 0.0, 1792.0)
+    DefineStartLocation(14, 0.0, 1792.0)
+    DefineStartLocation(15, 0.0, 1792.0)
+    DefineStartLocation(16, 0.0, 1792.0)
+    DefineStartLocation(17, 0.0, 1792.0)
+    DefineStartLocation(18, 0.0, 1792.0)
+    DefineStartLocation(19, 0.0, 1792.0)
+    DefineStartLocation(20, 0.0, 1792.0)
+    DefineStartLocation(21, 0.0, 1792.0)
+    DefineStartLocation(22, 0.0, 1792.0)
+    DefineStartLocation(23, 0.0, 1792.0)
     InitCustomPlayerSlots()
     InitCustomTeams()
     InitAllyPriorities()

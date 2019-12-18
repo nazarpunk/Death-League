@@ -4,7 +4,7 @@ do
 		InitGlobalsOrigin()
 		FogEnable(false)
 		FogMaskEnable(false)
-	
+		MeleeStartingHeroLimit()
 	
 	end
 end

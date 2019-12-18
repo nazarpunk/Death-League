@@ -1,0 +1,6 @@
+[Misc]
+MaxBldgSpeed=522.0
+MaxLevelHeroesDrainExp=0
+MaxUnitSpeed=522.0
+PawnItemRange=600.0
+
