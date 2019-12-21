@@ -7,6 +7,7 @@ local param = {
 	files      = { -- порядок сборки файлов
 		[[\build\libs]],
 		[[\build\global]],
+		[[\build\ability]],
 		[[\build\hero]],
 		[[\build\init.lua]]
 	},

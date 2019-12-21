@@ -5,6 +5,5 @@ do
 		FogEnable(false)
 		FogMaskEnable(false)
 		MeleeStartingHeroLimit()
-	
 	end
 end
