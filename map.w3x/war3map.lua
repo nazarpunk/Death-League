@@ -1,14 +1,13 @@
 function InitGlobals()
 end
-
 --testblock
 --CUSTOM_CODE
-do
-	local InitGlobalsOrigin = InitGlobals
-	function InitGlobals()
-		InitGlobalsOrigin()
-	
-	end
+do
+	local InitGlobalsOrigin = InitGlobals
+	function InitGlobals()
+		InitGlobalsOrigin()
+	
+	end
 end
 --CUSTOM_CODE
 function InitCustomPlayerSlots()
@@ -18,11 +17,9 @@ function InitCustomPlayerSlots()
     SetPlayerRaceSelectable(Player(0), true)
     SetPlayerController(Player(0), MAP_CONTROL_USER)
 end
-
 function InitCustomTeams()
     SetPlayerTeam(Player(0), 0)
 end
-
 function main()
     SetCameraBounds(-3328.0 + GetCameraMargin(CAMERA_MARGIN_LEFT), -3584.0 + GetCameraMargin(CAMERA_MARGIN_BOTTOM), 3328.0 - GetCameraMargin(CAMERA_MARGIN_RIGHT), 3072.0 - GetCameraMargin(CAMERA_MARGIN_TOP), -3328.0 + GetCameraMargin(CAMERA_MARGIN_LEFT), 3072.0 - GetCameraMargin(CAMERA_MARGIN_TOP), 3328.0 - GetCameraMargin(CAMERA_MARGIN_RIGHT), -3584.0 + GetCameraMargin(CAMERA_MARGIN_BOTTOM))
     SetDayNightModels("Environment\\DNC\\DNCLordaeron\\DNCLordaeronTerrain\\DNCLordaeronTerrain.mdl", "Environment\\DNC\\DNCLordaeron\\DNCLordaeronUnit\\DNCLordaeronUnit.mdl")
@@ -33,7 +30,6 @@ function main()
     InitBlizzard()
     InitGlobals()
 end
-
 function config()
     SetMapName("TRIGSTR_003")
     SetMapDescription("")
@@ -45,4 +41,3 @@ function config()
     SetPlayerSlotAvailable(Player(0), MAP_CONTROL_USER)
     InitGenericPlayerSlots()
 end
-
