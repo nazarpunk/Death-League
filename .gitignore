@@ -1,4 +1,3 @@
 /.idea/
-/node_modules/
-
-!/.idea/
+/conversation.json
+/Death-League.iml
