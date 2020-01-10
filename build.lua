@@ -5,10 +5,10 @@ pack.build(
 		[[C:\Users\nazarpunk\IdeaProjects\Death-League]],
 		'map.w3x',
 		{
-			'src\\lib',
-			'src\\global',
-			'src\\ability',
-			'src\\hero',
+			--'src\\lib',
+			--'src\\global',
+			--'src\\ability',
+			--'src\\hero',
 			'src\\init.lua'
 		},
 		'editor'
