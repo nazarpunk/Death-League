@@ -20,5 +20,6 @@ pack.build(
 			--'src\\hero',
 			--'src\\init.lua'
 		},
-		'editor'
+		'editor1'
+		
 )

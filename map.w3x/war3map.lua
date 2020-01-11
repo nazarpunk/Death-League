@@ -1,7 +1,7 @@
 function InitGlobals()
 end
 
---CUSTOM_CODE
+--CUSTOM_CODE
 --CUSTOM_CODE
 function InitCustomPlayerSlots()
     SetPlayerStartLocation(Player(0), 0)
