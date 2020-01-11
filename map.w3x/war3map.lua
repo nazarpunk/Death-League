@@ -1,14 +1,7 @@
 function InitGlobals()
 end
 
---testblock
 --CUSTOM_CODE
-do
-	local InitGlobalsOrigin = InitGlobals
-	function InitGlobals()
-		InitGlobalsOrigin()
-	end
-end
 --CUSTOM_CODE
 function InitCustomPlayerSlots()
     SetPlayerStartLocation(Player(0), 0)
