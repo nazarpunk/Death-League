@@ -72,16 +72,16 @@ function math.angleDiff(a, b)
 	return c > d and d or c
 end
 
--- https://xgm.guru/p/wc3/iscoordsincircle
 -- Проверяет, находится ли [x,y] в окружности [cx,cy] радиусом r
----@param x table
----@param y table
----@param cx table
----@param cy table
----@param r table
+---@param x real
+---@param y real
+---@param cx real
+---@param cy real
+---@param r real
 ---@return boolean
 function math.inCircleXY(x, y, cx, cy, r)
-	return (cx - x) * (cx - x) + (cy - y) * (cy - y) < r * r
+	local dx, dy = cx - x, cy - y
+	return dx * dx + dy * dy < r * r
 end
 
 -- xgm.guru/p/wc3/warden-math
@@ -90,18 +90,14 @@ end
 ---@return real degrees
 function math.angleDiffDeg(a, b)
 	a, b = math.abs(a), math.abs(b)
-	if a > b then
-		a, b = b, a
-	end
+	if a > b then a, b = b, a end
 	local x = b - 360
-	if b - a > a - x then
-		b = x
-	end
+	if b - a > a - x then b = x end
 	return math.abs(a - b)
 end
 
 -- https://xgm.guru/p/wc3/perpendicular
--- Находит длину перпендикуляра от линии проходящей через [xa, ya][xb, yb] к точке [xc, yc]
+-- Находит длину перпендикуляра от линии проходящей через [xa,ya][xb,yb] к точке [xc,yc]
 ---@param xa real
 ---@param ya real
 ---@param xb real

